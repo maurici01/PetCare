@@ -17,13 +17,13 @@ public class AnimalDAO {
 	public void create(Animal animal) {
 		// comando sql (do seu banco de dados)
 		String sql = "INSERT INTO animal (nome, especie, raca, data_nascimento, peso, id_proprietario) VALUES (?, ?, ?, ?, ?, ?)";
-
+		// try-catch-resources (para o create)
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement stat = conn.prepareStatement(sql)) {
 
 			stat.setString(1, animal.getNome());
 			stat.setString(2, animal.getEspecie());
 			stat.setString(3, animal.getRaca());
-			// Convertendo um LocalDate pra Date
+			// Convertendo data
 			stat.setDate(4, Date.valueOf(animal.getDataNascimento()));
 			stat.setDouble(5, animal.getPeso());
 			stat.setInt(6, animal.getIdProprietario());
@@ -39,7 +39,7 @@ public class AnimalDAO {
 		// comando sql (do seu banco de dados)
 		String sql = "SELECT * FROM animal";
 		List<Animal> ani = new ArrayList<Animal>();
-
+		// try-catch-resources (para o read (findAll()))
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement stat = conn.prepareStatement(sql);
 				ResultSet rs = stat.executeQuery()) {
@@ -50,7 +50,7 @@ public class AnimalDAO {
 				a.setNome(rs.getString("nome"));
 				a.setEspecie(rs.getString("especie"));
 				a.setRaca(rs.getString("raca"));
-				// conversão novamente
+				// Convertendo data
 				a.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				a.setPeso(rs.getDouble("peso"));
 				a.setIdProprietario(rs.getInt("id_proprietario"));
@@ -60,5 +60,41 @@ public class AnimalDAO {
 			System.err.println("Erro ao listar os animais: " + e.getMessage());
 		}
 		return ani;
+	}
+
+	// UPDATE
+	public void update(Animal animal) {
+		// comando sql (do seu banco de dados)
+		String sql = "UPDATE animal SET nome = ?, especie = ?, raca = ?, data_nascimento = ?, peso = ? WHERE id_animal = ?";
+		// try-catch-resources (para o update)
+		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement stat = conn.prepareStatement(sql)) {
+			stat.setString(1, animal.getNome());
+			stat.setString(2, animal.getEspecie());
+			stat.setString(3, animal.getRaca());
+			// Convertendo data
+			stat.setDate(4, Date.valueOf(animal.getDataNascimento()));
+			stat.setDouble(5, animal.getPeso());
+			stat.setInt(6, animal.getId());
+			stat.executeUpdate();
+			System.out.println("Animal atualizado");
+		} catch (SQLException e) {
+			System.out.println("Erro ao atualizar o animal: " + e.getMessage());
+		}
+	}
+
+	// DELETE
+	public void delete(int id) {
+		// comando sql (do seu banco de dados)
+		String sql = "DELETE FROM animal WHERE id_animal = ?";
+
+		// try-catch-resources (para a remoção)
+		try (Connection conn = ConnectionFactory.getConnection();
+			 PreparedStatement stat = conn.prepareStatement(sql)){
+			stat.setInt(1, id);
+			stat.executeUpdate();
+			System.out.println("Animal deletado");
+		} catch (SQLException e) {
+			System.out.println("Erro ao deletar o id do animal: " + e.getMessage());
+		}
 	}
 }

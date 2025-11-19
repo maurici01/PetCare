@@ -38,11 +38,26 @@ public class Main {
 		Animal ani = new Animal("Bog", "Dog", "vira-lata", LocalDate.of(2025, 1, 24), 34.5 ,16 );
 		animal.create(ani);
 		
-		//Read
+		//Read de animal (lista todos os animais)
 		System.out.println("Animais");
 		for(Animal a: animal.findAll()) {
 			System.out.println(a.toString());
 		}
+		
+		//Atualizando o animal 
+		ani.setId(3);
+		ani.setPeso(25.0);
+		ani.setNome("Cavalo Marinho");
+		ani.setEspecie("Aqua");
+		ani.setRaca("Alien");
+		ani.setDataNascimento(LocalDate.of(2023, 9, 29));
+		//a parte que atualiza no banco de dados
+		animal.update(ani);
+		
+		//deletando o animal pelo id
+		//animal.delete(2); //deletando o animal passando o id
+		
+		
 	}
 	
 }

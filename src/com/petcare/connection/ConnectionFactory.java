@@ -14,7 +14,7 @@ public class ConnectionFactory {
 		try {
 			return DriverManager.getConnection(URL, USER, PASSWORD);
 		} catch (SQLException e) {
-			throw new RuntimeException("Erro de conexão: ");
+			throw new RuntimeException("Erro de conexão: " + e.getMessage());
 		}
 	}
 	
