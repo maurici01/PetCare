@@ -16,7 +16,6 @@ public class Animal {
 	}
 
 	public Animal(String nome, String especie, String raca, LocalDate dataNascimento, double peso, int idProprietario) {
-		super();
 		this.nome = nome;
 		this.especie = especie;
 		this.raca = raca;

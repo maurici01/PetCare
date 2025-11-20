@@ -62,7 +62,7 @@ public class AnimalDAO {
 		return ani;
 	}
 
-	// UPDATE
+	// UPDATE ("Atualizar" o animal)
 	public void update(Animal animal) {
 		// comando sql (do seu banco de dados)
 		String sql = "UPDATE animal SET nome = ?, especie = ?, raca = ?, data_nascimento = ?, peso = ? WHERE id_animal = ?";

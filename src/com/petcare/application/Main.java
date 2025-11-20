@@ -4,8 +4,10 @@ import java.time.LocalDate;
 
 import com.petcare.dao.AnimalDAO;
 import com.petcare.dao.ProprietarioDAO;
+import com.petcare.dao.VeterinarioDAO;
 import com.petcare.model.Animal;
 import com.petcare.model.Proprietario;
+import com.petcare.model.Veterinario;
 
 public class Main {
 
@@ -14,7 +16,7 @@ public class Main {
 		ProprietarioDAO dao = new ProprietarioDAO();
 		
 		//Criando 1 Proprietario
-		Proprietario p = new Proprietario("Italo BETINHA", "52", "9589999", "Em casa", "Italo@ilo.com");
+		Proprietario p = new Proprietario("Italo", "52", "9589999", "Em casa", "Italo@italo.com");
 		dao.create(p);
 		
 		//Read
@@ -57,7 +59,30 @@ public class Main {
 		//deletando o animal pelo id
 		//animal.delete(2); //deletando o animal passando o id
 		
+		//Declarando um veterinario
+		System.out.println("Veterinario");
+		VeterinarioDAO vetDao = new VeterinarioDAO();
 		
+		//Registrando um veterinario
+		Veterinario vet = new Veterinario("Italo", "9575", "Adestrador", "719888888");
+		vetDao.create(vet);
+		
+		//Listando os veterinarios
+		for(Veterinario v: vetDao.findAll()) {
+			System.out.println(v);
+		}
+		
+		//Atualizar o veterinario
+		
+		Veterinario vetAt = new Veterinario();
+		vetAt.setCrmv("24");
+		vetAt.setNome("Cabeça");
+		vetAt.setTelefone("711111");
+		vetAt.setEspecialidade("Sei não");
+		vetDao.update(vetAt);
+		
+		//delete
+		//vetDao.delete("9575");;
 	}
 	
 }

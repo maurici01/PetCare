@@ -32,7 +32,7 @@ public class ProprietarioDAO {
 		}
 	}
 
-	// findAll 
+	// READ (Listar Todos os proprietarios)
 	public List<Proprietario> findAll() {
 		// comando sql (do seu banco de dados)
 		String sql = "SELECT * FROM proprietario";
