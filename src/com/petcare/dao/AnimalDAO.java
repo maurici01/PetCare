@@ -30,7 +30,7 @@ public class AnimalDAO {
 			stat.executeUpdate();
 			System.out.println("Animal registrado");
 		} catch (SQLException e) {
-			System.out.println("Erro ao inserir o animal: " + e.getMessage());
+			System.err.println("Erro ao inserir o animal: " + e.getMessage());
 		}
 	}
 
@@ -78,7 +78,7 @@ public class AnimalDAO {
 			stat.executeUpdate();
 			System.out.println("Animal atualizado");
 		} catch (SQLException e) {
-			System.out.println("Erro ao atualizar o animal: " + e.getMessage());
+			System.err.println("Erro ao atualizar o animal: " + e.getMessage());
 		}
 	}
 
@@ -94,7 +94,7 @@ public class AnimalDAO {
 			stat.executeUpdate();
 			System.out.println("Animal deletado");
 		} catch (SQLException e) {
-			System.out.println("Erro ao deletar o id do animal: " + e.getMessage());
+			System.err.println("Erro ao deletar o id do animal: " + e.getMessage());
 		}
 	}
 }
